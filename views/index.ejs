@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic CRUD Application</title>
+    <link rel="stylesheet" href="../public/css/style.css" />
+  </head>
+  <body>
+    <div class="home-container">
+      <div class="info-container">
+        <% if (!user) { %>
+        <div class="l-container">
+          <form action="/login" method="get">
+            <button type="submit" class="l-btn">Log In</button>
+          </form>
+          <form action="/register" method="get">
+            <button type="submit" class="l-btn">Register</button>
+          </form>
+        </div>
+        <% } else { %>
+        <div class="l-container">
+          <p class="user-greet">
+            <img
+              src="../public/img/face-solid-60.png"
+              alt="face"
+              class="face"
+            /><%= user.username %>
+          </p>
+          <form action="/logout?_method=DELETE" method="post">
+            <button type="submit" class="l-btn">Log Out</button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+      <div class="listings-container">
+        <div class="listings-title">
+          <p class="page-title">Listings</p>
+          <% if (user) { %>
+          <form action="/new-listing" method="get">
+            <button type="submit" class="l-btn add-l">
+              <img
+                src="../public/img/list-plus-regular-60.png"
+                alt="add"
+                class="add"
+              />Add New Listing
+            </button>
+          </form>
+          <% } %>
+        </div>
+        <div class="listings-card-main-container">
+          <% for (let listing of listings) { %>
+          <a href="/listing/<%= listing._id %>" class="listing-post-link">
+            <div class="listings-card-container">
+              <div class="listing-main-img">
+                <img src="<%= listing.mainimg %>" alt="" />
+              </div>
+              <div class="listing-info">
+                <p class="listing-locname"><%= listing.locname %></p>
+                <p class="listing-locadd l-values">
+                  <img
+                    src="../public/img/location-plus-solid-60.png"
+                    alt=""
+                    class="l-icon"
+                  /><%= listing.locadd%>
+                </p>
+                <p class="listing-username l-values">
+                  <img
+                    src="../public/img/face-solid-60.png"
+                    alt=""
+                    class="l-icon"
+                  /><%= listing.username%>
+                </p>
+                <p class="listing-price l-values">
+                  <img
+                    src="../public/img/purchase-tag-solid-60.png"
+                    alt=""
+                    class="l-icon"
+                  />₱ <%= listing.price %>
+                </p>
+                <div class="adtnl l-values">
+                  <div class="adtnl-img-container">
+                    <img src="<%= listing.secimg %>" alt="" class="adtnl-img" />
+                  </div>
+                  <div class="adtnl-img-container">
+                    <img src="<%= listing.thiimg %>" alt="" class="adtnl-img" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCA | Register</title>
+    <link rel="stylesheet" href="../public/css/style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <p class="page-title">Register</p>
+      <form action="/register" method="POST">
+        <div class="div">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="f-input"
+            placeholder="Username"
+            required
+          />
+        </div>
+        <div class="div">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="f-input"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button type="submit" class="f-btn">Register</button>
+      </form>
+      <p class="info">Already Registered?</p>
+      <form action="/login" method="get">
+        <button type="submit" class="f-btn">Log In</button>
+      </form>
+    </div>
+  </body>
+</html>

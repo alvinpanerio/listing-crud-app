@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCA | Log In</title>
+    <link rel="stylesheet" href="../public/css/style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <% if (error) {%>
+      <p class="incorrect">Incorrect username and password</p>
+      <% } %>
+      <p class="page-title">Log In</p>
+      <form action="/login" method="post">
+        <div class="div">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="f-input"
+            placeholder="Username"
+          />
+        </div>
+        <div class="div">
+          <input
+            type="password"
+            name="password"
+            class="f-input"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <button type="submit" class="f-btn">Log In</button>
+      </form>
+      <p class="info">Not Registered?</p>
+      <form action="/register" method="get">
+        <button type="submit" class="f-btn">Create a new account</button>
+      </form>
+    </div>
+  </body>
+</html>

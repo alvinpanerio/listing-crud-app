@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic CRUD Application</title>
+    <link rel="stylesheet" href="../public/css/style.css" />
+  </head>
+  <body>
+    <div class="home-container">
+      <div class="info-container">
+        <% if (!user) { %>
+        <div class="l-container">
+          <form action="/login" method="get">
+            <button type="submit" class="l-btn">Log In</button>
+          </form>
+          <form action="/register" method="get">
+            <button type="submit" class="l-btn">Register</button>
+          </form>
+        </div>
+        <% } else { %>
+        <div class="l-container">
+          <p class="user-greet">
+            <img
+              src="../public/img/face-solid-60.png"
+              alt="face"
+              class="face"
+            /><%= user.username %>
+          </p>
+          <form action="/logout?_method=DELETE" method="post">
+            <button type="submit" class="l-btn">Log Out</button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+      <div class="listings-container">
+        <div class="listings-title">
+          <p class="page-title"><%= listingpost.locname %></p>
+          <% if (user && listingpost.uid === user.id) { %>
+          <div class="ed">
+            <form
+              action="/listing/<%= listingpost._id %>/edit-listing"
+              method="get"
+            >
+              <button type="submit" class="l-btn add-l">
+                <img
+                  src="../public/img/edit-solid-60.png"
+                  alt="edit"
+                  class="add"
+                />Edit Listing
+              </button>
+            </form>
+            <form
+              action="/listing/<%= listingpost._id %>/remove-listing?_method=DELETE"
+              method="post"
+            >
+              <button type="submit" class="l-btn add-l">
+                <img
+                  src="../public/img/trash-solid-60.png"
+                  alt="edit"
+                  class="add"
+                />Delete Listing
+              </button>
+            </form>
+          </div>
+          <% } %>
+        </div>
+        <div class="listingpost-img-container">
+          <div class="listingpost-mainimg">
+            <img src="<%= listingpost.mainimg %> " alt="main-img" />
+          </div>
+          <div class="listingpost-secimg">
+            <div class="listingpost-secimg-c">
+              <img src="<%= listingpost.secimg %> " alt="sec-img" />
+            </div>
+            <div class="listingpost-thiimg-c">
+              <img src="<%= listingpost.thiimg %> " alt="thi-img" />
+            </div>
+          </div>
+          <div class="listingpost-info-container">
+            <div class="lp-values-container lp-width">
+              <img
+                src="../public/img/face-solid-60.png"
+                alt="face-icon"
+                class="lp-icon"
+              />
+              <p class="listingpost-values">
+                Hosted by <%= listingpost.username %>
+              </p>
+            </div>
+            <div class="lp-values-container lp-width">
+              <img
+                src="../public/img/location-plus-solid-60.png"
+                alt="loc-icon"
+                class="lp-icon"
+              />
+              <p class="listingpost-values">
+                Located at <%= listingpost.locadd %>
+              </p>
+            </div>
+            <div class="lp-values-container lp-width">
+              <img
+                src="../public/img/info-circle-solid-60.png"
+                alt="info-icon"
+                class="lp-icon"
+              />
+              <p class="listingpost-values"><%= listingpost.desc %></p>
+            </div>
+            <div class="lp-values-container lp-width">
+              <img
+                src="../public/img/purchase-tag-solid-60.png"
+                alt="ptag-icon"
+                class="lp-icon"
+              />
+              <p class="listingpost-values">₱ <%= listingpost.price %></p>
+            </div>
+            <div class="listingpost-map-container">
+              <%- listingpost.maplink %>
+            </div>
+          </div>
+        </div>
+        <p class="lp-sub-header">Comments</p>
+        <div class="listingpost-comments-container">
+          <div>
+            <% for (let comment of comments) { %>
+            <div class="listingpost-comment">
+              <div class="lp-p-info">
+                <img
+                  src="../public/img/face-solid-60.png"
+                  alt="face"
+                  class="lpc-face"
+                />
+                <div class="lpc-nd">
+                  <div>
+                    <p class="lpc-name lpc-size"><%= comment.username %></p>
+                    <p class="lpc-date lpc-size"><%= comment.date %></p>
+                  </div>
+                </div>
+              </div>
+              <p class="lp-comment lp-ml"><%= comment.comment %></p>
+              <% if (user && comment.uid === user.id) { %>
+              <div class="ed lp-ml">
+                <a
+                  href="/listing/<%= comment._id %>/edit-comment"
+                  class="comm-edit"
+                >
+                  Edit
+                </a>
+                <form
+                  action="/listing/<%= comment._id %>/remove-comment?_method=DELETE"
+                  method="post"
+                >
+                  <button class="comm-edit trans-btn">Delete</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="comment-form-container">
+          <form
+            action="/listing/<%= listingpost._id %>/new-comment"
+            method="post"
+          >
+            <input
+              type="text"
+              name="comment"
+              id="comment"
+              class="f-input list-input"
+              placeholder="Write a comment..."
+              required
+            />
+            <button type="submit" class="lp-comment-btn">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

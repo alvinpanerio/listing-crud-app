@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic CRUD Application</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+  </head>
+  <body>
+    <div class="home-container">
+      <div class="info-container">
+        <div class="l-container">
+          <p class="user-greet">
+            <img
+              src="/public/img/face-solid-60.png"
+              alt="face"
+              class="face"
+            /><%= user.username %>
+          </p>
+          <form action="/logout?_method=DELETE" method="post">
+            <button type="submit" class="l-btn">Log Out</button>
+          </form>
+        </div>
+      </div>
+      <div class="listings-container">
+        <div>
+          <div class="listings-title">
+            <p class="page-title">Edit Comment</p>
+          </div>
+          <div class="listingpost-comments-container grayed-out">
+            <div class="listingpost-comment lp-mt">
+              <div class="lp-p-info">
+                <img
+                  src="/public/img/face-solid-60.png"
+                  alt="face"
+                  class="lpc-face"
+                />
+                <div class="lpc-nd">
+                  <div>
+                    <p class="lpc-name lpc-size">
+                      <%= userCommentObj.username %>
+                    </p>
+                    <p class="lpc-date lpc-size"><%= userCommentObj.date %></p>
+                  </div>
+                </div>
+              </div>
+              <p class="lp-comment lp-ml"><%= userCommentObj.comment %></p>
+              <% if (user && userCommentObj.uid === user.id) { %>
+              <div class="ed lp-ml">
+                <form
+                  action="/listing/<%= userCommentObj._id %>/remove-comment?_method=DELETE"
+                  method="post"
+                >
+                  <button class="comm-edit trans-btn">Delete</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="comment-form-container">
+          <form
+            action="/listing/<%= userCommentObj._id %>/edit-comment?_method=PUT"
+            method="post"
+          >
+            <input
+              type="text"
+              name="comment"
+              id="comment"
+              class="f-input list-input"
+              placeholder="Update a comment..."
+              value="<%= userCommentObj.comment %>"
+              required
+            />
+            <button type="submit" class="lp-comment-btn">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

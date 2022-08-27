@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic CRUD Application</title>
+    <link rel="stylesheet" href="../public/css/style.css" />
+  </head>
+  <body>
+    <div class="home-container">
+      <div class="info-container">
+        <div class="l-container">
+          <p class="user-greet">
+            <img
+              src="../public/img/face-solid-60.png"
+              alt="face"
+              class="face"
+            /><%= user.username %>
+          </p>
+          <form action="/logout?_method=DELETE" method="post">
+            <button type="submit" class="l-btn">Log Out</button>
+          </form>
+        </div>
+      </div>
+      <div class="listings-container">
+        <div class="listings-title">
+          <p class="page-title">Add New Listing</p>
+        </div>
+        <div class="add-form">
+          <form action="/new-listing" method="post">
+            <p class="sub-header">Location Information</p>
+            <input
+              type="text"
+              name="locname"
+              id="locname"
+              class="f-input list-input"
+              placeholder="Location Name"
+              required
+            />
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="f-input list-input"
+              placeholder="Location/Address"
+              required
+            />
+            <input
+              type="text"
+              name="description"
+              id="description"
+              class="f-input list-input"
+              placeholder="Description"
+              required
+            />
+            <input
+              type="text"
+              name="maplink"
+              id="maplink"
+              class="f-input list-input"
+              placeholder="Embedded Map Tag"
+              required
+            />
+            <p class="sub-header">Price</p>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              class="f-input list-input"
+              placeholder="Price per night"
+              required
+            />
+            <p class="sub-header">Images (URL)</p>
+            <input
+              type="url"
+              name="mainpic"
+              id="mainpic"
+              class="f-input list-input"
+              placeholder="Main Image"
+              required
+            />
+            <p class="sub-sub-header">Sub Image</p>
+            <input
+              type="url"
+              name="secpic"
+              id="secpic"
+              class="f-input list-input"
+              placeholder="Second Image"
+              required
+            />
+            <input
+              type="url"
+              name="thipic"
+              id="thipic"
+              class="f-input list-input"
+              placeholder="Third Image"
+              required
+            />
+            <button type="submit" class="f-btn add-submit">Submit</button>
+          </form>
+        </div>
+        <form action="/" method="get" class="f-mcs">
+          <button class="f-btn cancel-submit">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
