@@ -1,6 +1,6 @@
-# listing-crud-app
+# Listing CRUD Application
 A basic CRUD listing application w/ authentication built using Express.js, Mongoose and EJS
-## Install
+## Installation
 `npm install`
-## Run
+## Usage
 `npm start` or `nodemon server.js`
